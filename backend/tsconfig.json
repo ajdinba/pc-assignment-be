@@ -1,0 +1,26 @@
+{
+  "extends": "fastify-tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "target": "ES2022",
+    "esModuleInterop": true,
+
+    // Required by `kysely`
+    // https://kysely.dev/docs/getting-started
+    "strict": true,
+
+    // Directly import `.ts` files
+    // "allowImportingTsExtensions": true,
+    // "noEmit": true
+
+  },
+  "include": [
+    "src/**/*.ts",
+
+    // Include typedefs for env vars
+    "environment.d.ts"
+  ]
+}

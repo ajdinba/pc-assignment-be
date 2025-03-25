@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Database",
+            "type": "shell",
+            "command": "make run-db",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Backend",
+            "type": "shell",
+            "command": "make run-be",  // Change this to your actual command
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Frontend",
+            "type": "shell",
+            "command": "make run-fe",  // Change this to your actual command
+            "problemMatcher": []
+        },
+        {
+            "label": "Run All Processes",
+            "dependsOn": ["Run Database", "Run Backend", "Run Frontend"],
+            "dependsOrder": "parallel"
+        }
+    ]
+}

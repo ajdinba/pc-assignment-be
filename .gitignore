@@ -1,0 +1,2 @@
+# Since it was specified that the database would be sent through e-mail, it will not be included in this repository in order to avoid any leaks
+test-db.sql

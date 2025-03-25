@@ -1,0 +1,24 @@
+services:
+  db:
+    # Pin latest most precise version of the image, with latest multiplatform digest
+    image: mysql:9.2.0-oraclelinux9@sha256:9b9d0aab4860798acff13d2a0ece3bc26639fe18b83fa5cd3e3d0e16b3ed05dd
+    # https://docs.docker.com/engine/containers/start-containers-automatically/#use-a-restart-policy
+    restart: always
+    environment:
+      # https://docs.docker.com/reference/compose-file/interpolation/
+      MYSQL_DATABASE: ${DB_NAME:-bankapp}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    volumes:
+      - db-data:/var/lib/mysql
+      # https://hub.docker.com/_/mysql - scroll down to "Initializing a fresh instance" for an explanation of the auto-execution of provided files
+      # This file ends with ".noautoexecute" to prevent its auto-execution since it doesn't have specified database that it should be applied to
+      - ./${DB_INITFILE_PATH:-test-db.sql}:/docker-entrypoint-initdb.d/init.sql.noautoexecute
+      # Instead, we will do it with a wrapper shell script
+      - ./${DB_INITSCRIPT_PATH:-init-db.sh}:/docker-entrypoint-initdb.d/init-db.sh
+    ports:
+      # Map container's port by default to 3307 since 3306 might be taken
+      # https://github.com/ishak-dev/BankApp-Test/blob/bb053a36899beaf1dd25348a2f6b2f360a20d9c8/src/components/TaskIntroduction.tsx#L23
+      - ${DB_PORT:-3307}:3306
+
+volumes:
+  db-data:

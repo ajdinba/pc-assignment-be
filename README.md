@@ -41,3 +41,5 @@ You can run this project in multiple ways:
 This project uses a forked version of the [original repository](https://github.com/ishak-dev/BankApp-Test) as a submodule due to a typo bug in the original, which is fixed in the fork.
 
 In the original assignment description and code, it is specified that `http://localhost:3306` is used as the default backend API url; however, this is [actually different in practice](https://github.com/ishak-dev/BankApp-Test/blob/bb053a36899beaf1dd25348a2f6b2f360a20d9c8/src/store/hostStore.ts#L9), and as such, the backend uses `8080` as its default intended port.
+
+You can view the project's Swagger/OpenAPI documentation by visiting `http://localhost:<port>/documentation`.
